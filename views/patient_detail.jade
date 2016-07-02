@@ -1,0 +1,259 @@
+extends pcp_layout
+
+block content
+  div#page-wrapper
+    .row
+      h2(style="display:inline-block") Patient Details
+      button.btn.btn-primary(type="button",style="margin-left:20px; margin-bottom:10px",data-toggle="modal",data-target="#referralModal") Initiate Referral
+    
+    if patient
+      .row
+        .panel.panel-default
+          .panel-body
+            .row
+              .col-md-2
+                img.img-thumbnail(src='/images/1.jpg', width="150")
+          
+              div.col-md-10(style="padding-left:40px")
+                .row
+                  h3(style="margin-top:1px") #{patient.title}. #{patient.lastName} #{patient.firstName}
+                .row
+                  .col-md-2
+                    span Patient Id:
+                  .col-md-10
+                    Strong #{patient._id}
+                
+                .row
+                  hr.col-md-8(style="border-top-width:2px")
+                  
+                .row
+                  .col-md-2
+                    span Blood Group:
+                  .col-md-10
+                    Strong #{patient.bloodGroup}
+                .row
+                  .col-md-2
+                    span Birth Date:
+                  .col-md-10
+                    Strong #{patient.birthDay}
+                .row
+                  .col-md-2
+                    span Sex:
+                  .col-md-10
+                    Strong #{patient.gender}
+                .row
+                  .col-md-2
+                    span Marital Status:
+                  .col-md-10
+                    Strong #{patient.maritalStatus}
+                .row
+                  .col-md-2
+                    span Occupation:
+                  .col-md-10
+                    Strong #{patient.occupation}
+                .row
+                  .col-md-2
+                    span Age:
+                  .col-md-10
+                    Strong #{patient.age}
+                    
+                .row
+                  hr.col-md-8(style="border-top-width:2px")
+                  
+                .row
+                  .col-md-2
+                    span Home Address:
+                  .col-md-10
+                    Strong #{patient.homeAddress}
+                .row
+                  .col-md-2
+                    span Phone:
+                  .col-md-10
+                    Strong #{patient.phone}
+                .row
+                  .col-md-2
+                    span Email:
+                  .col-md-10
+                    Strong #{patient.email}
+                    
+      .row
+        .panel.panel-default
+          div.panel-heading(style="font-weight:600") Vitals
+          div.panel-body(style="padding:0px")
+            div.col-md-3(style="border-right:2px solid #eee")
+              .row
+                div.col-md-6(style="text-align:center")
+                  img(src="/images/naked-vector.jpg", width="100", height="100")
+                div.col-md-6(style="text-align:center")
+                  i.fa.fa-long-arrow-up
+                  div 
+                    Strong 60
+                  div Height &nbsp
+                    i.fa.fa-line-chart.text-primary
+                  div (cm)
+                  i.fa.fa-long-arrow-down
+                
+              .row
+                hr(style="border-top-width:2px;margin-top:5px;margin-bottom:5px")
+              
+              div.row(style="margin-bottom:5px")
+                div.col-md-6(style="text-align:center")
+                  Strong
+                    div 59
+                  span Weight &nbsp
+                    i.fa.fa-line-chart.text-primary
+                  div (Kg)
+                div.col-md-6(style="text-align:center")
+                  Strong
+                    div 59
+                  |BMI 
+                  i.fa.fa-line-chart.text-primary
+                  div (Kg/m)
+              
+            div.col-md-9(style="padding:0px")
+              table.table.table-striped(style="margin-bottom:0px")
+                tbody
+                  tr
+                    th Temperature
+                    td 0c
+                    td 0F
+                    td 
+                      i.fa.fa-line-chart.fa-lg.text-primary
+                  tr
+                    th Blood Pressure
+                    td 93 /62 mmHg
+                    td Systolic/ Diastolic
+                    td 
+                      i.fa.fa-line-chart.fa-lg.text-primary
+                  tr
+                    th Pulse
+                    td 65/ min
+                    td Systolic/ Diastolic
+                    td 
+                      i.fa.fa-line-chart.fa-lg.text-primary
+                  tr
+                    th Respiration
+                    td bpm
+                    td 
+                    td 
+                      i.fa.fa-line-chart.fa-lg.text-primary
+                  tr
+                    th Oxygen Saturation
+                    td %
+                    td 
+                    td 
+                      i.fa.fa-line-chart.fa-lg.text-primary 
+
+    else
+      .alert No Record Found
+      
+    
+  <!-- Referral Modal -->
+  div#referralModal.modal.fade(role="dialog")
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          button.close(type="button",data-dismiss="modal",aria-hidden="true") ×
+          h4#myModalLabel.modal-title
+            |Initiate Referral
+        .modal-body
+          form#simpleForm(action="/pcp/referral", method="post")
+            div.text-center
+              a.btn.btn-primary(href="#step1",data-toggle="tab") Step 1 - Review Patient Info 
+              &nbsp
+              a.btn.btn-default(href="#step2",data-toggle="tab") Step 2 - Choose Referral Options
+              &nbsp
+              a.btn.btn-default(href="#step3",data-toggle="tab") Step 3 - Send Referral
+              
+            div.tab-content(style="margin-top:10px")
+              div#step1.tab-pane.row.active
+                div.col-md-8.col-md-offset-2
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Patient Id:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient._id}", name="patientId", disabled)
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Full Name:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient.title}. #{patient.lastName} #{patient.firstName}", disabled)
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Sex:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient.gender}", disabled)
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Birth Date:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient.birthDay}", disabled)
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Marital Status:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient.maritalStatus}", disabled)
+                  .row(style="margin-bottom:5px")
+                    .col-md-3
+                      span Occupation:
+                    .col-md-9
+                      input.form-control(type="text" value="#{patient.occupation}", disabled)
+                      
+                  .row(style="margin-top:5px")
+                    .col-md-2.col-md-offset-10
+                      a.btn.btn-default.next(href="#") Next
+              div#step2.tab-pane.row
+                div.col-md-8.col-md-offset-2
+                  .row
+                    .row
+                      .form-group
+                        input(type="hidden" value="#{patient._id}", name="patientId")
+                        label Diagnosis
+                        input.form-control(name="diagnosis")
+                      .form-group
+                        label Required Services
+                        select.form-control(multiple,name="requiredServices[]")
+                          each service, key in services
+                            option(value="#{key}") #{service}
+                      .form-group
+                        label Referral Type
+                        select.form-control(name="referralType")
+                          option  Select Referral Type
+                          option(value="emergency") Emergency
+                          option(value="regular") Regular
+                      .form-group
+                        label Referral Category
+                        select.form-control(name="referralCategory")
+                          option Select Referral Category
+                          option(value="inpatient") Inpatient
+                          option(value="outpatient")  Outpatient
+                      .form-group
+                        label Provider
+                        div
+                          button#populateProviders.btn.btn-default(type="button", style="vertical-align:baseline")
+                            span.fa.fa-upload
+                          select.form-control(name="provider", style="width:86%; display:inline-block;margin-right:2px;margin-left:2px")
+                            option  Select Provider
+                          button.btn.btn-default(type="button", style="vertical-align:baseline",data-container=".modal-body" data-toggle="popover" data-placement="top" data-content="" title="Evaluation Table", data-html="true")
+                            span.fa.fa-gear
+                      .form-group
+                        label Note
+                        textarea.form-control(rows="3",name="note")
+                      .form-group
+                        label Files
+                        input.form-control(type="file",name="files")
+                  .row
+                    .col-md-4.col-md-offset-8
+                      a.btn.btn-default.prev(href="#") Previous
+                      &nbsp
+                      a.btn.btn-default.next(href="#") Next
+              div#step3.tab-pane.row
+                div.col-md-8.col-md-offset-2
+                  .row
+                    .col-md-5.col-md-offset-8
+                      a.btn.btn-default.prev(href="#") Previous 
+                      &nbsp
+                      a#submitWizard.btn.btn-default.next(href="#") Send Referral
+          
+        .modal-footer
+          button.btn.btn-default(type="button",data-dismiss="modal") close

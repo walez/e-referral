@@ -1,0 +1,35 @@
+extends admin_layout
+
+block content
+  div#page-wrapper
+    .row
+      h2 #{clinicName} PCPS
+    
+    .row
+      .panel.panel-default
+        .panel-heading PCPs
+        .panel-body
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th #
+                  th PCP Id
+                  th PCP Name
+                  th Specialty 
+                  th Username
+              tbody
+                if pcps
+                  
+                  for pcp, i in pcps
+                    - var no = 1 + i
+                    tr
+                      td=no
+                      td #{pcp._id}
+                      td #{pcp.firstname}
+                      td #{pcp.specialtyLevel[0]}
+                      td #{pcp.username}
+                else
+                  tr
+                    td No Refferals
+                  

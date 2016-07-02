@@ -1,0 +1,19 @@
+extends layout
+
+block sidebar
+  .navbar-default.sidebar(role='navigation')
+    .sidebar-nav.navbar-collapse
+      ul#side-menu.nav.in
+        li.sidebar-search
+          form(action='/pcp/search',method='post')
+            .input-group.custom-search-form
+              input.form-control(type="text",placeholder="Search Patients",name='query')
+              span.input-group-btn
+        li
+          a(href="/pcp/referrals") Home
+        li
+          a(href="/pcp/referrals?action=sent") Sent Referrals
+        li
+          a(href="/pcp/settings") Settings
+        li
+          a(href='/logout') Logout

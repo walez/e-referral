@@ -1,0 +1,68 @@
+extends layout
+
+block sidebar
+  .navbar-default.sidebar(role='navigation')
+    .sidebar-nav.navbar-collapse
+      ul#side-menu.nav.in
+        li.sidebar-search
+          form(action='/pcp/search',method='post')
+            .input-group.custom-search-form
+              input.form-control(type="text",placeholder="Search Patients",name='query')
+              span.input-group-btn
+        li
+          a(href="/admin/referrals") Home
+        li
+          a(href="#addPcpModal", data-toggle="modal") New Physician
+        li
+          a(href="/admin/pcps") PCPs
+        li
+          a(href="/pcp/settings") Settings
+        li
+          a(href='/logout') Logout
+
+block modalBox
+  <!-- Add PCP Modal -->
+  div#addPcpModal.modal.fade(role="dialog")
+    .modal-dialog.modal-lg
+      .modal-content
+        form#simpleForm(action="/admin/new/pcp", method="post")
+          .modal-header
+            button.close(type="button",data-dismiss="modal",aria-hidden="true") ×
+            h4#myModalLabel.modal-title
+              |Add Physcian
+          .modal-body
+            .row
+              div(style="padding:20px")
+                .form-group
+                    label Title:
+                    input.form-control(type="text" value="", name="title")
+                .form-group
+                    label First Name:
+                    input.form-control(type="text" value="", name="firstname")
+                .form-group
+                    label Last Name:
+                    input.form-control(type="text" value="", name="lastname")
+                .form-group
+                    label Username:
+                    input.form-control(type="text" value="", name="username")
+                .form-group
+                    label Password:
+                    input.form-control(type="text" value="", name="password")
+                .form-group
+                    label Phone No:
+                    input.form-control(type="text" value="", name="phone")
+                .form-group
+                    label Gender:
+                    input.form-control(type="text",name="gender")
+                .form-group
+                    label Birth Date:
+                    input.form-control(type="text", name="birthDay")
+                .form-group
+                    label Marital Status:
+                    input.form-control(type="text", name="maritalStatus")
+                .form-group
+                    label Speciality Level:
+                    input.form-control(type="text" name="specialityLevel")
+          .modal-footer
+            button.btn.btn-success(type="submit") Save
+            button.btn.btn-default(type="button",data-dismiss="modal") close

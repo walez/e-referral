@@ -1,0 +1,107 @@
+extends layout
+
+block sidebar
+  div
+
+block content
+  .col-md-6
+    .row
+      .panel.panel-info
+        .panel-heading Add Patient 
+        .panel-body
+          form(action="/setup/patient", method="post")
+            .row
+              div(style="padding:5px")
+                .form-group
+                    label Title:
+                    input.form-control(type="text" value="", name="title")
+                .form-group
+                    label First Name:
+                    input.form-control(type="text" value="", name="firstname")
+                .form-group
+                    label Last Name:
+                    input.form-control(type="text" value="", name="lastname")
+                .form-group
+                    label Username:
+                    input.form-control(type="text" value="", name="username")
+                .form-group
+                    label Password:
+                    input.form-control(type="text" value="", name="password")
+                .form-group
+                    label Age:
+                    input.form-control(type="text" value="", name="age")
+                .form-group
+                    label Phone No:
+                    input.form-control(type="text" value="", name="phone")
+                .form-group
+                    label Email:
+                    input.form-control(type="text" value="", name="email")
+                .form-group
+                    label Home Address:
+                    input.form-control(type="text" value="", name="homeAddress")
+                .form-group
+                    label Gender:
+                    input.form-control(type="text",name="gender")
+                .form-group
+                    label Birth Date:
+                    input.form-control(type="text", name="birthDay")
+                .form-group
+                    label Marital Status:
+                    input.form-control(type="text", name="maritalStatus")
+                .form-group
+                    label Occupation:
+                    input.form-control(type="text" name="occupation")
+                .form-group
+                    label Weight:
+                    input.form-control(type="text" name="weight")
+                .form-group
+                    label Height:
+                    input.form-control(type="text" name="height")
+                .form-group
+                    label Blood Group:
+                    input.form-control(type="text" name="bloodGroup")
+                .form-group
+                    label Blood Pressure:
+                    input.form-control(type="text" name="bloodPressure")
+                .form-group
+                    label Pulse:
+                    input.form-control(type="text" name="pulse")
+                .form-group
+                    label Temperature:
+                    input.form-control(type="text" name="temperature")
+                .form-group
+                    label Respiration:
+                    input.form-control(type="text" name="respiration")
+                .form-group
+                    label BMI:
+                    input.form-control(type="text" name="bmi")
+                .form-group
+                  button.btn.btn-success(type="submit") Add Patient
+  .col-md-6
+    .row
+      .panel.panel-info
+        .panel-heading Add Admin
+        .panel-body
+          form(action="/setup/admin", method="post")
+            .row
+              div(style="padding:5px")
+                .form-group
+                    label First Name:
+                    input.form-control(type="text" value="", name="firstname")
+                .form-group
+                    label Last Name:
+                    input.form-control(type="text" value="", name="lastname")
+                .form-group
+                    label Username:
+                    input.form-control(type="text" value="", name="username")
+                .form-group
+                    label Password:
+                    input.form-control(type="text" value="", name="password")
+                .form-group
+                    label Providers:
+                    select.form-control(type="text" value="", name="provider")
+                      each provider in providers
+                        option(value="#{provider._id}") #{provider.name}
+                        
+                .form-group
+                  button.btn.btn-success(type="submit") Add Admin

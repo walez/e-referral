@@ -1,0 +1,25 @@
+extends pcp_layout
+
+block content
+  div#page-wrapper
+    .row
+      h4 Search Results For #{searchTerm}
+      
+    if results.patients
+      .row
+        .list-group
+          for patient in results.patients
+            a.list-group-item(href="/pcp/patient/#{patient._id}") #{patient.lastName}, #{patient.firstName}
+    else
+      .row
+        .alert.alert-info No Matching Patient
+        
+    if results.referrals    
+      .row
+        .list-group
+          for referral in results.referrals
+            a.list-group-item(href="/pcp/referral/#{referral._id}") Referral #{referral._id}
+    else
+      .row
+        .alert.alert-info No Matching Referral
+      

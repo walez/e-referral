@@ -1,0 +1,191 @@
+extends layout
+
+block content
+  if status == "success"
+    .alert.alert-success.alert-dismissable
+      button.close(type="button",data-dismiss="alert")  ×
+      |Feedback Successfully Published
+      a.alert-link(href="/logout")  Logout
+  if status == "failure"
+    .alert.alert-danger.alert-dismissable
+      button.close(type="button",data-dismiss="alert")  ×
+      Issue publishing feedback, Please try again.
+      a.alert-link(href="/logout")  Logout
+  .container(style="background-color:#7588BF;color:#FFF;padding-bottom:15px")
+    h1.text-center Patient FeedBack Survey
+    form(action="/patient/feedback",method="post")
+      .row
+        .col-xs-12.col-md-6(style="margin-left:10px")
+          h2.glyphicon.glyphicon-calendar &nbsp
+            small 2016-06-06
+          .row
+            .form-group
+              label Medical Provider
+              select.form-control(name="provider")
+                for provider in providers
+                  option(value="#{provider._id}") #{provider.name}
+            .form-group
+              label Would you recommend this hospital to a friend or family member?
+              select(name="recommend",style="color:black")
+                option(value="yes") Yes
+                option(value="no") No
+              
+      .row
+        .col-md-6
+          .form-group
+            h3  Accessibility
+            label Public transportation, parking, clear signage
+              div
+                label.radio-inline
+                  input(type="radio",name="accessRating",id="optionVeryPoor", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="accessRating",id="optionPoor", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="accessRating",id="optionAverage", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="accessRating",id="optionGood", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="accessRating",id="optionExcellent", value="1") 
+                  |Excellent
+          .form-group
+            h3  Admission Process
+            label How organized was the admission process?
+              div
+                label.radio-inline
+                  input(type="radio",name="admissionRating",id="optionVeryPoor", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="admissionRating",id="optionPoor", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="admissionRating",id="optionAverage", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="admissionRating",id="optionGood", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="admissionRating",id="optionExcellent", value="1") 
+                  |Excellent
+          .form-group
+            h3  Doctors Experience
+            label Knowledge and ability to clearly explain treatment & answer all question
+              div
+                label.radio-inline
+                  input(type="radio",name="doctorExpRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="doctorExpRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="doctorExpRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="doctorExpRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="doctorExpRating", value="1") 
+                  |Excellent
+          .form-group
+            h3  Nursing Experience
+            label Promptness in responding to all calls and queries
+              div
+                label.radio-inline
+                  input(type="radio",name="nursingExpRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="nursingExpRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="nursingExpRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="nursingExpRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="nursingExpRating", value="1") 
+                  |Excellent
+        .col-md-6
+          .form-group
+            h3  Pain & Comfort Levels
+            label How well was the pain managed?
+              div
+                label.radio-inline
+                  input(type="radio",name="comfortRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="comfortRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="comfortRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="comfortRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="comfortRating", value="1") 
+                  |Excellent
+          .form-group
+            h3  Satisfaction
+            label Overall Treatment Satisfaction
+              div
+                label.radio-inline
+                  input(type="radio",name="satisfactionRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="satisfactionRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="satisfactionRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="satisfactionRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="satisfactionRating", value="1") 
+                  |Excellent
+          .form-group
+            h3  Safety and Security
+            label Feeling of safe and secure environment when on hospital property
+              div
+                label.radio-inline
+                  input(type="radio",name="safetyRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="safetyRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="safetyRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="safetyRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="safetyRating", value="1") 
+                  |Excellent
+          .form-group
+            h3  Wait Times
+            label Wait times for procedures, tests, medications, consultations & response from staff
+              div
+                label.radio-inline
+                  input(type="radio",name="waitTimeRating", value="0") 
+                  |Very poor
+                label.radio-inline
+                  input(type="radio",name="waitTimeRating", value="0.3") 
+                  |Poor
+                label.radio-inline
+                  input(type="radio",name="waitTimeRating", value="0.5") 
+                  |Average
+                label.radio-inline
+                  input(type="radio",name="waitTimeRating", value="0.7") 
+                  |Good
+                label.radio-inline
+                  input(type="radio",name="waitTimeRating", value="1") 
+                  |Excellent
+          .form-group
+            .col-md-2.col-md-offset-8
+              button.btn.btn-success.btn-lg(type="submit") PUBLISH
+    

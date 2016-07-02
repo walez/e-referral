@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.css')
+    link(rel='stylesheet', href='/stylesheets/sb-admin-2.css')
+    
+  body
+    nav.navbar.navbar-default.navbar-static-top(role='navigation',style='margin-bottom:0')
+    
+      div.navbar-header
+        button.navbar-toggle(type='button',data-toggle='collapse')
+        a.navbar-brand(href='#') Patient e-Referral System PERS
+      if pcp
+        .pull-right
+          h4(style="padding:10px") #{pcp.clinic_id.name}
+        
+      block sidebar
+    
+    block content
+    block modalBox
+    div
+      footer
+        ul.nav.navbar-nav
+          li
+             a(href="#") © 2016 All rights reserved.
+          li 
+            a(href="#") Links
+              
+        script(src='/javascripts/jquery.js', type='text/javascript')
+        script(src='/javascripts/bootstrap.js', type='text/javascript')
+        script(src='/javascripts/custom.js', type='text/javascript')
+        script(src='/javascripts/sb-admin-2.js', type='text/javascript')

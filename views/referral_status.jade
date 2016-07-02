@@ -1,0 +1,248 @@
+extends pcp_layout
+
+block content
+  div#page-wrapper
+    .row
+      .col-lg-12
+        h2.page-header Referral Status
+    
+    .row
+      .col-lg-12
+        .panel.panel-info
+          .panel-heading 
+            |Referral Details
+            
+            if !referingPcp
+              .pull-right
+                .btn-group
+                  button.btn.btn-default.btn-xs.dropdown-toggle(type='button',data-toggle='dropdown',aria-expanded='false')
+                    |Actions &nbsp
+                    span.caret
+                  ul.dropdown-menu.pull-right(role='menu')
+                    li
+                      a(href='#{referral._id}/accept') Accept
+                    li
+                      a(href='#{referral._id}/reject') Reject
+          
+          .panel-body
+            .row
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong Id
+                  .col-md-8
+                    |#{referral._id}
+                    
+                .row
+                  .col-md-4
+                    Strong|Status
+                  .col-md-8
+                    if referral.status == 'Pending'
+                      span.label.label-default #{referral.status}
+                    if referral.status == 'Accepted'
+                      span.label.label-success #{referral.status}
+                    if referral.status == 'Rejected'
+                      span.label.label-danger #{referral.status}
+                    
+                .row
+                  .col-md-4
+                    Strong|Diagnosis
+                  .col-md-8
+                    |#{referral.diagnosis}
+                
+                .row
+                  .col-md-4
+                    Strong Referral Type
+                  .col-md-8
+                    |#{referral.referralType}
+                
+                .row
+                  .col-md-4
+                    Strong Referral Category
+                  .col-md-8
+                    |#{referral.referralCategory}
+                
+                .row
+                  .col-md-4
+                    Strong Required Services
+                  .col-md-8
+                    |#{referral.requiredServices}
+              
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong|Note
+                  .col-md-8
+                    #{referral.note}
+                
+                .row
+                  .col-md-4
+                    Strong|Files
+                  .col-md-8
+                    a(href="http://google.com", target='_blank')
+                      |patient radiology
+                
+                .row
+                  .col-md-4
+                    Strong|Created
+                  .col-md-8
+                    |#{referral.created}
+                
+                .row
+                  .col-md-4
+                    Strong| Updated
+                  .col-md-8
+                    |#{referral.updated}
+    
+    
+    .row
+      
+      .col-lg-12
+        .panel.panel-info
+          .panel-heading Referring Hospital Details
+          
+          .panel-body
+            .row
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong Organization
+                  .col-md-8
+                    |#{referral.referingProviderId.name}
+                
+                .row
+                  .col-md-4
+                    Strong|Name
+                  .col-md-8
+                    |#{referral.referingPcpId.title}. #{referral.referingPcpId.lastname} #{referral.referingPcpId.firstname}
+                    
+                .row
+                  .col-md-4
+                    Strong Specialty Level
+                  .col-md-8
+                    |#{referral.referingPcpId.specialityLevel}
+              
+                .row
+                  .col-md-4
+                    Strong Address
+                  .col-md-8
+                    |#{referral.referingProviderId.address}
+              
+              
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong Phone
+                  .col-md-8
+                    |#{referral.referingPcpId.phone}
+                
+                .row
+                  .col-md-4
+                    Strong Email
+                  .col-md-8
+                    |#{referral.referingPcpId.email}
+      .col-lg-12
+        .panel.panel-info
+          .panel-heading Referred- To Hospital Details
+          
+          .panel-body
+            .row
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong Organization
+                  .col-md-8
+                    |#{referral.referedProviderId.name}
+                
+                .row
+                  .col-md-4
+                    Strong|Name
+                  .col-md-8
+                    if (referral.referedPcpId)
+                      |#{referral.referedPcpId.title}. #{referral.referedPcpId.lastname} #{referral.referedPcpId.firstname}
+                    
+                .row
+                  .col-md-4
+                    Strong Specialty Level
+                  .col-md-8
+                    if (referral.referedPcpId)
+                      |#{referral.referedPcpId.specialityLevel}
+              
+                .row
+                  .col-md-4
+                    Strong Address
+                  .col-md-8
+                    |#{referral.referedProviderId.address}
+              
+              
+              .col-md-6
+                .row
+                  .col-md-4
+                    Strong Phone
+                  .col-md-8
+                    if (referral.referedPcpId)
+                      |#{referral.referedPcpId.phone}
+                
+                .row
+                  .col-md-4
+                    Strong Email
+                  .col-md-8
+                    if (referral.referedPcpId)
+                      |#{referral.referedPcpId.email}
+      .col-lg-12
+          .panel.panel-info
+            .panel-heading Patient Details
+
+            .panel-body
+              .row
+                .col-md-5
+                  .row
+                    .col-md-4
+                      Strong ID
+                    .col-md-8
+                      |#{referral.patientId._id}
+
+                  .row
+                    .col-md-4
+                      Strong|First Name
+                    .col-md-8
+                      |#{referral.patientId.firstName}
+
+                  .row
+                    .col-md-4
+                      Strong Last Name
+                    .col-md-8
+                      |#{referral.patientId.lastName}
+
+                  .row
+                    .col-md-4
+                      Strong Age
+                    .col-md-8
+                      |#{referral.patientId.age}
+
+
+                .col-md-7
+                  .row
+                    .col-md-4
+                      Strong Sex
+                    .col-md-8
+                      |#{referral.patientId.gender}
+
+                  .row
+                    .col-md-4
+                      Strong Occupation
+                    .col-md-8
+                      |#{referral.patientId.occupation}
+
+                  .row
+                    .col-md-4
+                      Strong Address
+                    .col-md-8
+                      |#{referral.patientId.homeAddress}
+
+                  .row
+                    .col-md-4
+                      Strong Email
+                    .col-md-8
+                      |#{referral.patientId.email}
+              

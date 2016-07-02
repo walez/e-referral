@@ -1,0 +1,48 @@
+extends admin_layout
+
+block content
+  div#page-wrapper
+    .row
+      h2 #{clinicName} Referrals
+    
+    .row
+      .panel.panel-default
+        .panel-heading Referrals
+        .panel-body
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th #
+                  th Referral Id
+                  th Diagnosis
+                  th Referring PCP
+                  th Referred- To Hospital 
+                  th Referral Type
+                  th Status
+                  th Action
+              tbody
+                if referrals
+                  
+                  for referral, i in referrals
+                    - var no = 1 + i
+                    if referral.status == 'Accepted'
+                      - var lbl = "success"
+                    if referral.status == 'Rejected'
+                      - var lbl = "danger"
+                    if referral.status == 'Pending'
+                      - var lbl = "default"
+                    tr(class="#{lbl}")
+                      td=no
+                      td #{referral._id}
+                      td #{referral.diagnosis}
+                      td #{referral.referingProviderId.name}
+                      td #{referral.referedProviderId.name}
+                      td #{referral.referralType}
+                      td #{referral.status}
+                      td 
+                        a.btn.btn-success(href="/admin/referral/#{referral._id}") View Details
+                else
+                  tr
+                    td No Refferals
+                  
